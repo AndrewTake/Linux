@@ -1,0 +1,63 @@
+#task 2, file 2
+
+#!/usr/bin/bash
+
+#: Title       : System 2
+#: Date        : Oct 20 2022
+#: Author      : Andrew Hull
+#: Version     : 1.0
+#: Description : Script that prints info
+#: Options     : show an ascii graphic of tux
+
+#host name :hostname
+#user name :whoami
+#uptime :uptime
+#Operating system name (ie Ubuntu, Fedora…)
+#and version, if there is a version. A rolling release distro like Arch may not have a version :cat /etc/os-release
+#Kernel release :uname -r
+#login shell :echo "$SHELL"
+#number of packages installed (you can just use apt for this)
+#memory available: grep MemTotal /proc/meminfo.
+#memory used: cat /proc/meminfo
+RED='\033[0;31m'
+NC='\033[0m' 
+usage() {
+	echo -e "\nUsage ${0} [OPTION]"
+	echo 'Display system information'
+	exit 1
+}
+
+distr=`lsb_release -d`
+login=$SHELL
+echo -e "${RED}host${NC}           " `hostname`
+echo -e "${RED}user${NC}           " `whoami`
+echo -e "${RED}uptime${NC}         " `uptime -p`
+echo -e "${RED}distro${NC}         " ${distr:13}
+echo -e "${RED}kernel${NC}         " `uname -r`
+echo -e "${RED}mem available${NC}  " `free | awk 'FNR==2 {print $7/1000000 "Gi"}'`
+echo -e "${RED}mem used${NC}       " `free | awk 'FNR == 2 {print $3/1000000 "Gi"}'`
+echo -e "${RED}packages${NC}       " `dpkg -l | wc -l`
+echo -e "${RED}login${NC}          " ${login:5}
+
+while getops ":ht" OPTION; do
+	case ${OPTION} in 
+		h)
+			SHOW_HELP
+                 	exit 0
+                        ;;
+	
+		t)
+	
+		  echo -n "        .--.     ";echo -e "${RED}host${NC}           " `hostname`
+      		  echo -n "       |o_o |    ";echo -e "${RED}user${NC}           " `whoami`
+      		  echo -n "       |:_/ |    ";echo -e "${RED}uptime${NC}         " `uptime -p`
+      		  echo -n "      / /  \ \   ";echo -e "${RED}distro${NC}         " ${distr:13}
+      		  echo -n "     (|     | )  ";echo -e "${RED}kernel${NC}         " `uname -r`
+      		  echo -n "    /'\_   _/'\  ";echo -e "${RED}mem available${NC}  " `free | awk 'FNR==2 {print $7/1000000 "Gi"}'`
+      		  echo -n "    \___)=(___/  ";echo -e "${RED}mem used${NC}       " `free | awk 'FNR == 2 {print $3/1000000 "Gi"}'`
+      		  echo -n "                 ";echo -e "${RED}packages${NC}       " `dpkg -l | wc -l`
+       		  echo -n "                 ";echo -e "${RED}login${NC}          " ${login:5}
+			;;
+	esac
+done
+

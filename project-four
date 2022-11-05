@@ -1,0 +1,13 @@
+#task 4, file 4
+
+#!/usr/bin/bash
+
+#: Title       : System 3
+#: Date        : Oct 20 2022
+#: Author      : Andrew Hull
+#: Version     : 1.0
+#: Description : Backup a dir
+#: Options     : to name the backup file, if no name is provided use a default that includes the date.
+
+#test whether a device or filesystem is mounted: findmnt
+#If it is mounted display a message that includes the size in a human readable format: mounted() (can use Vue)

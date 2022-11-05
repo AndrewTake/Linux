@@ -1,0 +1,17 @@
+#task 3, file 3
+
+#!/usr/bin/bash
+
+#: Title       : System 3
+#: Date        : Oct 20 2022
+#: Author      : Andrew Hull
+#: Version     : 1.0
+#: Description : Backup a dir
+#: Options     : to name the backup file, if no name is provided use a default that includes the date.
+#backup a directory or directories to a specific location.
+
+#Have a default location as well as the ability to pass a location as an argument: cp
+
+#create an archived file `.tar.gz` from your directory or list of directories: tar
+
+#have an option to name the backup file, if no name is provided use a default that includes the date: mv
