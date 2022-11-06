@@ -11,3 +11,57 @@
 
 #test whether a device or filesystem is mounted: findmnt
 #If it is mounted display a message that includes the size in a human readable format: mounted() (can use Vue)
+
+mount() {
+	echo -e "\n ${0} [PATH DEV/FILESYS]"
+	echo "Check if mounted and output percentage"
+	exit 1
+}
+while getops :h? OPTION; do
+	case ${OPTION} in
+		h|?)
+			mountDisplay() {
+ 		      	PERCENT=$(df --output=pcent $1 | grep '[0-9]')
+       			M=$(df --output=avail $1 -h | grep '[0-9]')
+        	exit 0
+}
+			;;
+		esac
+done
+
+
+if [[ $1 ]]; then
+	STATUS=$(df $1)
+	STATUS=$(echo $?)
+	if [[ $STATUS == 0 ]]; then
+		mountDisplay $1
+	else
+		echo -e "ERROR"
+		exit 2
+	fi
+else
+	echo -e "ERROR"
+	exit 2
+fi
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
