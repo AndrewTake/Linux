@@ -4,34 +4,80 @@
 #: Author
 #: Version
 #: Description : write short notes, read notes, search for notes by tags, title or date #: Options : (tags, title or date)
-: Quick note taking CLI : Oct 20 2022
-: Andrew Hull : 1.0
-Quick note taking CLI
+#: Quick note taking CLI : Oct 20 2022
+#: Andrew Hull : 1.0
+#Quick note taking CLI
 
-write short notes
+#write short notes
 
-read notes
+#read notes
 
-search for notes by tags, title or date.
+#search for notes by tags, title or date.
 
-auto append a date to a note when the note is created.
-Notes should have a title.
-Notes should have optional tags.
+#auto append a date to a note when the note is created.
+#Notes should have a title.
+#Notes should have optional tags.
 
-Your notes will be stored as plain text (ie not in a database)
+#Your notes will be stored as plain text (ie not in a database)
 
-use options for selecting search(tags, title or date)
+#use options for selecting search(tags, title or date)
 
-Things to consider: How will notes be organized? Single file, or multiple directories of notes.
+#Things to consider: How will notes be organized? Single file, or multiple directories of notes.
 
-Don’t just use Vim(or another text editor) to write notes. You are creating a script that will write text to a file.
-hint, you probably don’t want to use read for the actual note.
+#Don’t just use Vim(or another text editor) to write notes. You are creating a script that will write text to a file.
+#hint, you probably don’t want to use read for the actual note.
+
+
+
 write_file() {
 
-	read -p "Create file" FILE
-	while [ -f ${NOTES_DIR}/${FILE} ]; do
-		echo "${FILE} already exist, select a new name)"
-		read -p "Create new file" FILE
+	read -p "Please enter a title name for the doc" DOCINFO
+	while [z $DOCINFO];
+	do
+		read -p "Please enter a new title" DOCINFO
 	done
+	read -p "Enter a tag" DOCINFO
+	read -p "Enter a date for the doc" DOCINFO
+	while [-f ${DOCDIR}/${FILE} ]: do
+		echo "${DOCINFO} already exists, select a new title)"
+		read -p "Create new file" DOCINFO
+	done
+	
+	
+	file=$DOCINFO.txt 
+	d=`date +%D` 
+
+
+	echo "title: "$title"" >> ~/bin/$file
+	echo ""date: "$d" >> ~/bin/$file 
+	echo ""tag: "$tag" >> ~/bin/$file
+	echo ""content: "$content" >> ~/bin/$file 
 }
-function writeInFile 0){
+
+main () {
+	read -p "Choose one?
+	a. Create a note
+	b. Read a note
+	c. Search for a note with tags
+	" choice  
+	case $choice in
+ 		A)
+    			writeNote    
+   			;;
+  		B)
+    			readNotes
+    			;;
+  		C)
+    			searchNotes
+    			;;
+  		esac
+}
+
+main
+
+
+
+
+
+
+
