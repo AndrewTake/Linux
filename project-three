@@ -8,6 +8,7 @@
 #: Version     : 1.0
 #: Description : Backup a dir
 #: Options     : to name the backup file, if no name is provided use a default that includes the date.
+#reference https://www.youtube.com/watch?v=MCx5p8acsE0
 #backup a directory or directories to a specific location.
 
 #Have a default location as well as the ability to pass a location as an argument: cp
@@ -17,9 +18,10 @@
 #have an option to name the backup file, if no name is provided use a default that includes the date: mv
 
 
-LOCATION = /bin
+LOCATION = $(dirname "$0")
 
 function check_directory {
+	echo "checking directory"
 	if [! -s "/backup_dir.conf"]
 	then
 		echo "Create list of dir"
@@ -28,7 +30,8 @@ function check_directory {
 }
 
 function backup_location {
-	        if [! -s "/backup_location.conf"]
+	echo "checking backup location"
+	if [! -s "/backup_location.conf"]
         then
                 echo "Create list of dir"
                 exit 1
@@ -51,6 +54,7 @@ function backup {
 		chown captain:captain $filename
 
 		echo "backing up the file" >> $LOCATION
+	
 	done < /backup_dirs.conf
 	
 	echo "Completed at" >> $LOCATION
