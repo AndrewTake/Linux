@@ -15,3 +15,48 @@
 #create an archived file `.tar.gz` from your directory or list of directories: tar
 
 #have an option to name the backup file, if no name is provided use a default that includes the date: mv
+
+
+LOCATION = /bin
+
+function check_directory {
+	if [! -s "/backup_dir.conf"]
+	then
+		echo "Create list of dir"
+		exit 1
+	fi
+}
+
+function backup_location {
+	        if [! -s "/backup_location.conf"]
+        then
+                echo "Create list of dir"
+                exit 1
+        fi
+}
+
+
+function backup {
+	path=$(cat /backup_location.conf)
+	echo "making backup" > $LOCATION
+	
+	while read dir_path
+	do
+		dir_name=$(basename $dir_path)
+		
+		filename=$path$dir_name.tar.xz
+
+		tar -zcf $filename $path 2>> $LOCATION
+
+		chown captain:captain $filename
+
+		echo "backing up the file" >> $LOCATION
+	done < /backup_dirs.conf
+	
+	echo "Completed at" >> $LOCATION
+	date >> $LOCATION
+}
+check_directory
+backup_location
+backup
+
