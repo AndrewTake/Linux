@@ -22,7 +22,7 @@
 
 #use options for selecting search(tags, title or date)
 
-#Things to consider: How will notes be organized? Single file, or multiple directories of notes.
+#Thi:ngs to consider: How will notes be organized? Single file, or multiple directories of notes.
 
 #Don’t just use Vim(or another text editor) to write notes. You are creating a script that will write text to a file.
 #hint, you probably don’t want to use read for the actual note.
@@ -74,6 +74,20 @@ main () {
 }
 
 main
+
+while getops "wv" arg; do
+	case $arg in 
+	w)
+	if [[ ! -d ~/bin/ ]]; then
+		mkdir ~/bin/ 
+	fi 
+	write_file()
+	main()
+	;;
+	esac
+done
+
+
 
 
 
